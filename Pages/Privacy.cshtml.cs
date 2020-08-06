@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SynopticForecastWebsite2.Pages
 {
-    [Authorize]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;

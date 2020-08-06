@@ -1,0 +1,184 @@
+﻿@page
+@model SynopticForecastWebsite2.Pages.ForecastEditModel
+@{
+    ViewData["Title"] = "Edit Forecast";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section Styles
+{
+    <style type="text/css">
+
+    </style>
+}
+
+<h1>Edit Forecast</h1>
+
+<h2>City - CityCode</h2>
+<h3 style="font-style:italic">For: ForecastTime</h3>
+
+<form method="post">
+    <table class="table table-bordered">
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Minimum Temperature (C)</td>
+            <td><input type="number" asp-for="MinimumTemperature" min="-40" max="60" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Maximum Temperature (C)</td>
+            <td><input type="number" asp-for="MaximumTemperature" min="-40" max="60" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Surface Temperature (C)</td>
+            <td><input type="number" asp-for="SurfaceTemperature" min="-40" max="60" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Surface Dewpoint (C)</td>
+            <td><input type="number" asp-for="SurfaceDewpoint" min="-40" max="60" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Surface Wind Direction (deg)</td>
+            <td><input type="number" asp-for="SurfaceWindDirect" min="0" max="350" step="10" /></td>
+        </tr>
+        <tr>
+            <td>Surface Wind Speed (kts)</td>
+            <td><input type="number" asp-for="SurfaceWindSpeed" min="0" max="100" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Surface Wind Speed Maximum (kts)</td>
+            <td><input type="number" asp-for="SurfaceMaxWindSpeed" min="0" max="100" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Sea Level Pressure (mb)</td>
+            <td><input type="number" asp-for="SeaLevelPressure" min="900" max="1050" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Cloud Cover</td>
+            <td>
+                <select asp-for="CloudCover">
+                    <option value="CLR">CLR</option>
+                    <option value="SCT">SCT</option>
+                    <option value="BKN">BKN</option>
+                    <option value="OVC">OVC</option>
+                    <option value="OBS">OBS</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Cloud Ceiling</td>
+            <td><input type="number" asp-for="CloudCeiling" min="1" max="8" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Visibility</td>
+            <td><input type="number" asp-for="Visibility" min="1" max="7" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Observed Weather</td>
+            <td>
+                <select asp-for="ObservedWeather">
+                    <option value="" disabled>Liquid Precipitation</option>
+                    <option value="DZ">DZ (Drizzle)</option>
+                    <option value="RA">RA (Rain)</option>
+                    <option value="SHRA">SHRA (Rain showers)</option>
+                    <option value="TSRA">TSRA (Thunderstorm)</option>
+                    <option value="TSRA GR">TSRA GR (Thunderstorm with hail)</option>
+                    <option value="" disabled>Freezing Precipitation</option>
+                    <option value="FZDZ">FZDZ (Freezing drizzle)</option>
+                    <option value="FZRA">FZRA (Freezing rain)</option>
+                    <option value="PL">PL (Ice pellets/Sleet)</option>
+                    <option value="GR">GR (Hail/Graupel)</option>
+                    <option value="GS">GS (Small hail/Small snow pellets)</option>
+                    <option value="" disabled>Frozen Precipitation</option>
+                    <option value="SN">SN (Snow)</option>
+                    <option value="SHSN">SHSN (Snow showers)</option>
+                    <option value="SG">SG (Snow grains)</option>
+                    <option value="IC">IC (Ice crystals)</option>
+                    <option value="PL">PL (Ice pellets/Sleet)</option>
+                    <option value="GR">GR (Hail/Graupel)</option>
+                    <option value="GS">GS (Small hail/Small snow pellets)</option>
+                    <option value="TSSN">TSSN (Thunderstorm with snow)</option>
+                    <option value="" disabled>Obscuration</option>
+                    <option value="BR">BR (Mist)</option>
+                    <option value="FG">FG (Fog)</option>
+                    <option value="FU">FU (Smoke)</option>
+                    <option value="VA">VA (Volcanic Ash)</option>
+                    <option value="DU">DU (Dust)</option>
+                    <option value="SA">SA (Sand)</option>
+                    <option value="HZ">HZ (Haze)</option>
+                    <option value="PY">PY (Spray)</option>
+                    <option value="" disabled>Other Weather</option>
+                    <option value="FC">FC (Funnel cloud/Tornado)</option>
+                    <option value="PO">PO (Waterspout/Landspout/Dust devil)</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Probability of Precipitation</td>
+            <td><input type="number" asp-for="ProbOfPrecip" min="0" max="100" step="10" /></td>
+        </tr>
+        <tr>
+            <td>Precipitation Category</td>
+            <td><input type="number" asp-for="PrecipCategory" min="0" max="6" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Precipitation Type</td>
+            <td>
+                <select asp-for="PrecipType">
+                    <option value="Liquid">Liquid</option>
+                    <option value="Freezing">Freezing</option>
+                    <option value="Frozen">Frozen</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Snow Accumulation</td>
+            <td>
+                <select asp-for="SnowAccumulation">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Thunderstorms</td>
+            <td><input type="checkbox" asp-for="Thunderstorms" value="true" /></td>
+        </tr>
+        <tr>
+            <td>Severe Weather</td>
+            <td>
+                <input type="checkbox" asp-for="SevereWeatherFlood" value="true" />
+                <label asp-for="SevereWeatherFlood">Flood</label><br />
+                <input type="checkbox" asp-for="SevereWeatherWind" value="true" />
+                <label asp-for="SevereWeatherWind">Wind</label><br />
+                <input type="checkbox" asp-for="SevereWeatherTornado" value="true" />
+                <label asp-for="SevereWeatherTornado">Tornado</label><br />
+                <input type="checkbox" asp-for="SevereWeatherHail" value="true" />
+                <label asp-for="SevereWeatherHail">Hail</label><br />
+            </td>
+        </tr>
+        <tr>
+            <td>Frontal Passage</td>
+            <td>
+                <select asp-for="FrontalPassage">
+                    <option value="cold">Cold Front</option>
+                    <option value="warm">Warm Front</option>
+                    <option value="occluded">Occluded Front</option>
+                    <option value="trough">Trough</option>
+                </select>
+                at
+                <input type="number" asp-for="FrontalPassageTime" min="0" max="23" step="1" />
+                UTC
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>SUBMIT</td>
+        </tr>
+    </table>
+</form>
