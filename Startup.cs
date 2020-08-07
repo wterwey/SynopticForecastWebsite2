@@ -30,6 +30,12 @@ namespace SynopticForecastWebsite2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ForecastContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForecastContext")));
+            services.AddDbContext<ForecastPeriodContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForecastPeriodContext")));
+            services.AddDbContext<VerifiedForecastContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VerifiedForecastContext")));
+
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
@@ -90,6 +96,7 @@ namespace SynopticForecastWebsite2
 
             app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
