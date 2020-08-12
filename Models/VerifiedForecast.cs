@@ -9,6 +9,7 @@ namespace SynopticForecastWebsite2.Models
     {
         //==============================================================
         // PROPERTIES
+        public int VerifiedForecastID { get; set; }
         public int? ForecastTime { get; set; }
         public int? MinimumTemperature { get; set; }
         public int? MaximumTemperature { get; set; }
@@ -21,10 +22,10 @@ namespace SynopticForecastWebsite2.Models
         public string CloudCover { get; set; }
         public int? CloudCeiling { get; set; }
         public int? Visibility { get; set; }
-        public List<string> ObservedWeather { get; set; }
+        public string ObservedWeather { get; set; }
         public int? ProbOfPrecip { get; set; }
         public int? PrecipCategory { get; set; }
-        public List<string> PrecipType { get; set; }
+        public string PrecipType { get; set; }
         public int? SnowAccumulation { get; set; }
         public bool Thunderstorms { get; set; }
         public bool SevereWeatherFlood { get; set; }
@@ -33,8 +34,8 @@ namespace SynopticForecastWebsite2.Models
         public bool SevereWeatherHail { get; set; }
         // FrontalPassage will list either the type of frontal passage (warm, cold, etc.) or Null for none.
         // FrontalPassageTime will list the UTC hour of the frontal passage or -999 for none.
-        public List<string> FrontalPassage { get; set; }
-        public List<int?> FrontalPassageTime { get; set; }
+        public string FrontalPassage { get; set; }
+        public string FrontalPassageTime { get; set; }
 
         //==============================================================
         // ToString()
@@ -50,16 +51,13 @@ namespace SynopticForecastWebsite2.Models
             tempStr += $"Sea-level pressure: {SeaLevelPressure}\n";
             tempStr += $"Clouds: {CloudCover} with ceiling {CloudCeiling}\n";
             tempStr += $"Visibility category {Visibility}\n";
-            for (int i = 0; i < ObservedWeather.Count; i++) { tempStr += $"Observed Weather: {ObservedWeather[i]}\n"; }
+            tempStr += $"Observed Weather: {ObservedWeather}\n"; 
             tempStr += $"Precip Probability of {ProbOfPrecip}% at QPF category {PrecipCategory} of type(s) ";
-            for (int i = 0; i < PrecipType.Count; i++) { tempStr += "{PrecipType} "; }
+            tempStr += "{PrecipType} ";
             tempStr += "\n";
             tempStr += $"Snow accumulation category: {SnowAccumulation}\n";
             tempStr += $"Thunderstorms: {Thunderstorms}, Svr Flood: {SevereWeatherFlood}, Wind: {SevereWeatherWind}, Tornado: {SevereWeatherTornado}, Hail: {SevereWeatherHail}\n";
-            for (int i = 0; i < FrontalPassage.Count; i++)
-            {
-                tempStr += $"Front {FrontalPassage[i]} passing at {FrontalPassageTime[i]} UTC.\n\n";
-            }
+            tempStr += $"Front {FrontalPassage} passing at {FrontalPassageTime} UTC.\n\n";
             return tempStr;
         }
 
@@ -69,6 +67,7 @@ namespace SynopticForecastWebsite2.Models
 
         public VerifiedForecast(int forecastTime)
         {
+            VerifiedForecastID = 0;
             ForecastTime = forecastTime;
             MinimumTemperature = null;
             MaximumTemperature = null;
@@ -81,18 +80,47 @@ namespace SynopticForecastWebsite2.Models
             CloudCover = null;
             CloudCeiling = null;
             Visibility = null;
-            ObservedWeather = new List<string>();
+            ObservedWeather = null;
             ProbOfPrecip = null;
             PrecipCategory = null;
-            PrecipType = new List<string>();
+            PrecipType = null;
             SnowAccumulation = null;
             Thunderstorms = false;
             SevereWeatherFlood = false;
             SevereWeatherWind = false;
             SevereWeatherTornado = false;
             SevereWeatherHail = false;
-            FrontalPassage = new List<string>();
-            FrontalPassageTime = new List<int?>();
+            FrontalPassage = null;
+            FrontalPassageTime = null;
+
+        }
+        public VerifiedForecast()
+        {
+            VerifiedForecastID = 0;
+            ForecastTime = null;
+            MinimumTemperature = null;
+            MaximumTemperature = null;
+            SurfaceTemperature = null;
+            SurfaceDewpoint = null;
+            SurfaceWindDirect = null;
+            SurfaceWindSpeed = null;
+            SurfaceMaxWindSpeed = null;
+            SeaLevelPressure = null;
+            CloudCover = null;
+            CloudCeiling = null;
+            Visibility = null;
+            ObservedWeather = null;
+            ProbOfPrecip = null;
+            PrecipCategory = null;
+            PrecipType = null;
+            SnowAccumulation = null;
+            Thunderstorms = false;
+            SevereWeatherFlood = false;
+            SevereWeatherWind = false;
+            SevereWeatherTornado = false;
+            SevereWeatherHail = false;
+            FrontalPassage = null;
+            FrontalPassageTime = null;
 
         }
 
@@ -112,18 +140,18 @@ namespace SynopticForecastWebsite2.Models
             this.CloudCover = (string)forecastParams[8];
             this.CloudCeiling = (int)forecastParams[9];
             this.Visibility = (int)forecastParams[10];
-            this.ObservedWeather = (List<string>)forecastParams[11];
+            this.ObservedWeather = (string)forecastParams[11];
             this.ProbOfPrecip = (int)forecastParams[12];
             this.PrecipCategory = (int)forecastParams[13];
-            this.PrecipType = (List<string>)forecastParams[14];
+            this.PrecipType = (string)forecastParams[14];
             this.SnowAccumulation = (int)forecastParams[15];
             this.Thunderstorms = (bool)forecastParams[16];
             this.SevereWeatherFlood = (bool)forecastParams[17];
             this.SevereWeatherWind = (bool)forecastParams[18];
             this.SevereWeatherTornado = (bool)forecastParams[19];
             this.SevereWeatherHail = (bool)forecastParams[20];
-            this.FrontalPassage = (List<string>)forecastParams[21];
-            this.FrontalPassageTime = (List<int?>)forecastParams[22];
+            this.FrontalPassage = (string)forecastParams[21];
+            this.FrontalPassageTime = (string)forecastParams[22];
         }
 
 

@@ -31,9 +31,7 @@ namespace SynopticForecastWebsite2
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ForecastContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForecastContext")));
-            services.AddDbContext<ForecastPeriodContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForecastPeriodContext")));
-            services.AddDbContext<VerifiedForecastContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VerifiedForecastContext")));
+            services.AddDbContext<ForecastWebsiteContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForecastWebsiteContext")));
 
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

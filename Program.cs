@@ -33,12 +33,8 @@ namespace SynopticForecastWebsite2
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var forecastContext = services.GetRequiredService<ForecastContext>();
-                forecastContext.Database.EnsureCreated();
-                var forecastPeriodContext = services.GetRequiredService<ForecastPeriodContext>();
-                forecastPeriodContext.Database.EnsureCreated();
-                var verifiedForecastContext = services.GetRequiredService<VerifiedForecastContext>();
-                verifiedForecastContext.Database.EnsureCreated();
+                var forecastSiteContext = services.GetRequiredService<ForecastWebsiteContext>();
+                DbInitializer.Initialize(forecastSiteContext);
             }
         }
     }

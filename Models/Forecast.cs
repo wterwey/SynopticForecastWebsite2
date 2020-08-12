@@ -9,6 +9,7 @@ namespace SynopticForecastWebsite2.Models
     {
         //==============================================================
         // PROPERTIES
+        public int ForecastID { get; set; }
         public int? ForecastTime { get; set; }
         public int? MinimumTemperature { get; set; }
         public int? MaximumTemperature { get; set; }
@@ -33,8 +34,8 @@ namespace SynopticForecastWebsite2.Models
         public bool SevereWeatherHail { get; set; }
         // FrontalPassage will list either the type of frontal passage (warm, cold, etc.) or Null for none.
         // FrontalPassageTime will list the UTC hour of the frontal passage or -999 for none.
-        public List<string> FrontalPassage { get; set; }
-        public List<int?> FrontalPassageTime { get; set; }
+        public string FrontalPassage { get; set; }
+        public string FrontalPassageTime { get; set; }
 
         //==============================================================
         // ToString()
@@ -54,10 +55,7 @@ namespace SynopticForecastWebsite2.Models
             tempStr += $"Precip Probability of {ProbOfPrecip}% at QPF category {PrecipCategory} of type {PrecipType}\n";
             tempStr += $"Snow accumulation category: {SnowAccumulation}\n";
             tempStr += $"Thunderstorms: {Thunderstorms}, Svr Flood: {SevereWeatherFlood}, Wind: {SevereWeatherWind}, Tornado: {SevereWeatherTornado}, Hail: {SevereWeatherHail}\n";
-            for (int i = 0; i < FrontalPassage.Count; i++)
-            {
-                tempStr += $"Front {FrontalPassage[i]} passing at {FrontalPassageTime[i]} UTC.\n\n";
-            }
+            tempStr += $"Front {FrontalPassage} passing at {FrontalPassageTime} UTC.\n\n";
             return tempStr;
         }
 
@@ -67,6 +65,7 @@ namespace SynopticForecastWebsite2.Models
 
         public Forecast(int forecastTime)
         {
+            ForecastID = 0;
             ForecastTime = forecastTime;
             MinimumTemperature = null;
             MaximumTemperature = null;
@@ -89,10 +88,41 @@ namespace SynopticForecastWebsite2.Models
             SevereWeatherWind = false;
             SevereWeatherTornado = false;
             SevereWeatherHail = false;
-            FrontalPassage = new List<string>();
-            FrontalPassageTime = new List<int?>();
+            FrontalPassage = null;
+            FrontalPassageTime = null;
 
         }
+
+        public Forecast()
+        {
+            ForecastID = 0;
+            ForecastTime = null;
+            MinimumTemperature = null;
+            MaximumTemperature = null;
+            SurfaceTemperature = null;
+            SurfaceDewpoint = null;
+            SurfaceWindDirect = null;
+            SurfaceWindSpeed = null;
+            SurfaceMaxWindSpeed = null;
+            SeaLevelPressure = null;
+            CloudCover = null;
+            CloudCeiling = null;
+            Visibility = null;
+            ObservedWeather = null;
+            ProbOfPrecip = null;
+            PrecipCategory = null;
+            PrecipType = null;
+            SnowAccumulation = null;
+            Thunderstorms = false;
+            SevereWeatherFlood = false;
+            SevereWeatherWind = false;
+            SevereWeatherTornado = false;
+            SevereWeatherHail = false;
+            FrontalPassage = null;
+            FrontalPassageTime = null;
+
+        }
+
 
         //==============================================================
         // DATA ADDITION METHODS
@@ -120,8 +150,8 @@ namespace SynopticForecastWebsite2.Models
             this.SevereWeatherWind = (bool)forecastParams[18];
             this.SevereWeatherTornado = (bool)forecastParams[19];
             this.SevereWeatherHail = (bool)forecastParams[20];
-            this.FrontalPassage = (List<string>)forecastParams[21];
-            this.FrontalPassageTime = (List<int?>)forecastParams[22];
+            this.FrontalPassage = (string)forecastParams[21];
+            this.FrontalPassageTime = (string)forecastParams[22];
         }
 
 
