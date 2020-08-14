@@ -1,9 +1,33 @@
-﻿@page
+﻿@page "{FPid?}"
 @model SynopticForecastWebsite2.Pages.SchedulingEditModel
 @{
     ViewData["Title"] = "SchedulingEdit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+@section Styles
+{
+    <style type="text/css">
+    </style>
+}
 
-<h1>SchedulingEdit</h1>
+<h1>Edit Current Forecast Periods</h1>
+
+<form method="post">
+    <table class="table table-bordered">
+        <tr>
+            <th>City (Code)</th>
+            <th>Forecast Starting Time</th>
+            <th>Forecasting Open - Close Times</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td><input type="text" asp-for="FPEdit.City" /> (<input type="text" asp-for="FPEdit.CityID" />) </td>
+            <td><input type="datetime-local" asp-for="FPEdit.StartingTimeUTC" /></td>
+            <td><input type="datetime-local" asp-for="FPEdit.OpenTimeUTC" /> - <input type="datetime-local" asp-for="FPEdit.ClosedTimeUTC" /></td>
+            <td><input type="submit" value="Save" class="btn btn-success btn-sm" /></td>
+        </tr>
+    </table>
+</form>
+
+
 

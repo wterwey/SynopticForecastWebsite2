@@ -10,15 +10,16 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // PROPERTIES
         public int VerifiedForecastID { get; set; }
+        public int ForecastPeriodID { get; set; }
         public int? ForecastTime { get; set; }
-        public int? MinimumTemperature { get; set; }
-        public int? MaximumTemperature { get; set; }
-        public int? SurfaceTemperature { get; set; }
-        public int? SurfaceDewpoint { get; set; }
+        public double? MinimumTemperature { get; set; }
+        public double? MaximumTemperature { get; set; }
+        public double? SurfaceTemperature { get; set; }
+        public double? SurfaceDewpoint { get; set; }
         public int? SurfaceWindDirect { get; set; }
         public int? SurfaceWindSpeed { get; set; }
         public int? SurfaceMaxWindSpeed { get; set; }
-        public int? SeaLevelPressure { get; set; }
+        public double? SeaLevelPressure { get; set; }
         public string CloudCover { get; set; }
         public int? CloudCeiling { get; set; }
         public int? Visibility { get; set; }
@@ -65,9 +66,10 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // CONSTRUCTOR
 
-        public VerifiedForecast(int forecastTime)
+        public VerifiedForecast(int forecastTime, int forecastPeriodID)
         {
             VerifiedForecastID = 0;
+            ForecastPeriodID = forecastPeriodID;
             ForecastTime = forecastTime;
             MinimumTemperature = null;
             MaximumTemperature = null;
@@ -97,6 +99,7 @@ namespace SynopticForecastWebsite2.Models
         public VerifiedForecast()
         {
             VerifiedForecastID = 0;
+            ForecastPeriodID = 0;
             ForecastTime = null;
             MinimumTemperature = null;
             MaximumTemperature = null;

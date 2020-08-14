@@ -10,6 +10,7 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // PROPERTIES
         public int ForecastID { get; set; }
+        public int ForecastPeriodID { get; set; }
         public int? ForecastTime { get; set; }
         public int? MinimumTemperature { get; set; }
         public int? MaximumTemperature { get; set; }
@@ -63,9 +64,10 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // CONSTRUCTOR
 
-        public Forecast(int forecastTime)
+        public Forecast(int forecastTime, int forecastPeriodID)
         {
             ForecastID = 0;
+            ForecastPeriodID = forecastPeriodID;
             ForecastTime = forecastTime;
             MinimumTemperature = null;
             MaximumTemperature = null;
@@ -96,6 +98,7 @@ namespace SynopticForecastWebsite2.Models
         public Forecast()
         {
             ForecastID = 0;
+            ForecastPeriodID = 0;
             ForecastTime = null;
             MinimumTemperature = null;
             MaximumTemperature = null;

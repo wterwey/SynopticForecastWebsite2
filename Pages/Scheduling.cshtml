@@ -4,6 +4,35 @@
     ViewData["Title"] = "Scheduling";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+@section Styles
+{
+    <style type="text/css">
+    </style>
+}
 
 <h1>Scheduling</h1>
 
+<table class="table table-bordered">
+    <tr>
+        <th>Forecast Period ID</th>
+        <th>City (Code)</th>
+        <th>Forecast Starting Time</th>
+        <th>Forecasting Open - Close Times</th>
+        <th><form><a class="btn btn-primary btn-sm" asp-page="SchedulingAdd">Add New Period</a></form></th>
+    </tr>
+    @foreach (var period in Model.ForecastPeriods)
+    {
+        <tr>
+            <td>@period.ForecastPeriodID</td>
+            <td>@period.City (@period.CityID)</td>
+            <td>@period.StartingTimeUTC</td>
+            <td>@period.OpenTimeUTC - @period.ClosedTimeUTC</td>
+            <td>
+                <form>
+                    <a class="btn btn-success btn-sm" asp-page="SchedulingEdit" asp-route-FPid="@period.ForecastPeriodID">Edit</a>
+                    <input type="submit" value="Remove" class="btn btn-danger btn-sm" /><input type="hidden" name="ForecastPeriodID" value="@period.ForecastPeriodID" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
