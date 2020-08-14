@@ -28,9 +28,9 @@
             <td>@period.StartingTimeUTC</td>
             <td>@period.OpenTimeUTC - @period.ClosedTimeUTC</td>
             <td>
-                <form>
+                <form method="post">
                     <a class="btn btn-success btn-sm" asp-page="SchedulingEdit" asp-route-FPid="@period.ForecastPeriodID">Edit</a>
-                    <input type="submit" value="Remove" class="btn btn-danger btn-sm" /><input type="hidden" name="ForecastPeriodID" value="@period.ForecastPeriodID" />
+                    <input type="submit" value="Remove" class="btn btn-danger btn-sm" /><input type="hidden" name="FPRemove" value="@period.ForecastPeriodID"><input type="hidden" name="ForecastPeriodID" value="@period.ForecastPeriodID" />
                 </form>
             </td>
         </tr>

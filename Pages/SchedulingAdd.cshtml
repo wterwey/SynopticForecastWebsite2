@@ -10,32 +10,30 @@
     </style>
 }
 
-<h1>Add New Forecast Period</</h1>
-
-<!--
+<h1>Add New Forecast Period</h1>
 
 <form method="post">
     <table class="table table-bordered">
         <tr>
             <td>City Name</td>
-            <td><input type="text" asp-for="City" /></td>
+            <td><input type="text" asp-for="FPAdd.City" /><input type="hidden" asp-for="FPAdd.ForecastPeriodID"/></td>
         </tr>
         <tr>
             <td>City Code</td>
-            <td><input type="text" asp-for="CityID" /></td>
+            <td><input type="text" asp-for="FPAdd.CityID" /></td>
         </tr>
         <tr>
             <td>Initial Time (UTC)</td>
-            <td><input type="datetime-local" asp-for="StartingTimeUTC" /></td>
+            <td><input type="datetime-local" asp-for="FPAdd.StartingTimeUTC" /></td>
         </tr>
         <tr>
             <td>Forecast Contest Open Time (Local)</td>
-            <td><input type="datetime-local" asp-for="OpenTimeUTC" /></td>
+            <td><input type="datetime-local" asp-for="FPAdd.OpenTimeUTC" /></td>
         </tr>
         <tr>
             <td>Forecast Contest Closing Time (Local)</td>
-            <td><input type="datetime-local" asp-for="ClosedTimeUTC" /></td>
+            <td><input type="datetime-local" asp-for="FPAdd.ClosedTimeUTC" /></td>
         </tr>
     </table>
+    <input type="submit" value="Add" class="btn btn-success btn-lg" />
 </form>
- -->

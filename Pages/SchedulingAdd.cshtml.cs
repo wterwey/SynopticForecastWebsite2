@@ -19,11 +19,38 @@ namespace SynopticForecastWebsite2.Pages
             _context = context;
         }
 
-        public List<ForecastPeriod> ForecastPeriods { get; set; }
+        [BindProperty]
+        public ForecastPeriod FPAdd { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            ForecastPeriods = await _context.ForecastPeriods.ToListAsync();
+            FPAdd = new ForecastPeriod();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            FPAdd.ForecastTime1 = 12;
+            FPAdd.ForecastTime2 = 24;
+            FPAdd.ForecastTime3 = 36;
+            FPAdd.ForecastTime4 = 48;
+            FPAdd.ForecastTime5 = 60;
+
+            FPAdd.ForecastTimeUTC1 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime1);
+            FPAdd.ForecastTimeUTC2 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime2);
+            FPAdd.ForecastTimeUTC3 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime3);
+            FPAdd.ForecastTimeUTC4 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime4);
+            FPAdd.ForecastTimeUTC5 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime5);
+
+            _context.ForecastPeriods.Add(FPAdd);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("Scheduling");
         }
     }
 }

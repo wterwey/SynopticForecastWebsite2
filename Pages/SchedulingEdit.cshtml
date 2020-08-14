@@ -21,10 +21,11 @@
             <th></th>
         </tr>
         <tr>
-            <td><input type="text" asp-for="FPEdit.City" /> (<input type="text" asp-for="FPEdit.CityID" />) </td>
+            <td><input type="text" asp-for="FPEdit.City" /> <br />
+                (<input type="text" asp-for="FPEdit.CityID" />) </td>
             <td><input type="datetime-local" asp-for="FPEdit.StartingTimeUTC" /></td>
             <td><input type="datetime-local" asp-for="FPEdit.OpenTimeUTC" /> - <input type="datetime-local" asp-for="FPEdit.ClosedTimeUTC" /></td>
-            <td><input type="submit" value="Save" class="btn btn-success btn-sm" /></td>
+            <td><input type="submit" value="Save" class="btn btn-success btn-sm" /><input type="hidden" asp-for="FPEdit.ForecastPeriodID" /></td>
         </tr>
     </table>
 </form>

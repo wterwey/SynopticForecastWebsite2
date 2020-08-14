@@ -24,6 +24,22 @@ namespace SynopticForecastWebsite2.Pages
         public async Task OnGetAsync()
         {
             ForecastPeriods = await _context.ForecastPeriods.ToListAsync();
+            ForecastPeriods.Reverse();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int? FPRemove)
+        {
+            if (FPRemove == null) { return NotFound(); }
+            else
+            {
+                ForecastPeriod fpRemove = await _context.ForecastPeriods.FindAsync(FPRemove);
+                if (fpRemove != null)
+                {
+                    _context.ForecastPeriods.Remove(fpRemove);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToPage("Scheduling");
+            }
         }
     }
 }
