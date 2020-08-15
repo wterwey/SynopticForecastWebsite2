@@ -4,6 +4,56 @@
     ViewData["Title"] = "Verifications";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+@section Styles
+{
+    <style type="text/css">
+    </style>
+}
 
-<h1>Verifications</h1>
+<h1>Verification Forecasts</h1>
+
+<table class="table table-bordered">
+    @foreach (var veriFore in Model.AllVerified)
+    {
+        <tr>
+            <td>@veriFore.ForecastPeriod.City - @veriFore.ForecastTime</td>
+        </tr>
+    }
+</table>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Forecast City (Code)</th>
+        <th>Forecast Period Start</th>
+        <th>Verification Forecast (Quick Look)</th>
+    </tr>
+    @foreach (var period in Model.ForecastPeriods)
+    {
+        Model.CurrentVerified = Model.AllVerified.Where(x => x.ForecastPeriodID == period.ForecastPeriodID).ToList();
+        
+        <tr>
+            <td>@period.City (@period.CityID)</td>
+            <td>@period.StartingTimeUTC</td>
+            @foreach (var veriCast in Model.CurrentVerified)
+            {
+                <td>
+                    <table class="table table-borderless">
+                    <tr>
+                        <th>Hours After</th>
+                        <th>Surf. Temp.</th>
+                        <th>Surf. Dewp.</th>
+                        <th>SLP</th>
+                    </tr>
+                    <tr>
+                        <td>@veriCast.ForecastTime</td>
+                        <td>@veriCast.SurfaceTemperature</td>
+                        <td>@veriCast.SurfaceDewpoint</td>
+                        <td>@veriCast.SeaLevelPressure</td>
+                    </tr>
+                    </table>
+                </td>
+             }
+        </tr>
+    }
+</table>
 

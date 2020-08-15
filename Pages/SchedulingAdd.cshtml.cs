@@ -24,7 +24,7 @@ namespace SynopticForecastWebsite2.Pages
 
         public void OnGet()
         {
-            FPAdd = new ForecastPeriod();
+            FPAdd = new ForecastPeriod() { VerifiedForecasts = new List<VerifiedForecast>() };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -45,6 +45,26 @@ namespace SynopticForecastWebsite2.Pages
             FPAdd.ForecastTimeUTC3 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime3);
             FPAdd.ForecastTimeUTC4 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime4);
             FPAdd.ForecastTimeUTC5 = FPAdd.StartingTimeUTC.AddHours((double) FPAdd.ForecastTime5);
+
+            await _context.SaveChangesAsync();
+
+            FPAdd.VerifiedForecasts = new List<VerifiedForecast>();
+
+            FPAdd.VerifiedForecasts.Add(new VerifiedForecast() { ForecastTime = 12 });
+            FPAdd.VerifiedForecasts.Add(new VerifiedForecast() { ForecastTime = 24 });
+            FPAdd.VerifiedForecasts.Add(new VerifiedForecast() { ForecastTime = 36 });
+            FPAdd.VerifiedForecasts.Add(new VerifiedForecast() { ForecastTime = 48 });
+            FPAdd.VerifiedForecasts.Add(new VerifiedForecast() { ForecastTime = 60 });
+
+            //FPAdd.VerifiedForecasts.Add(new VerifiedForecast(12, FPAdd));
+            //FPAdd.VerifiedForecasts.Add(new VerifiedForecast(24, FPAdd));
+            //FPAdd.VerifiedForecasts.Add(new VerifiedForecast(36, FPAdd));
+            //FPAdd.VerifiedForecasts.Add(new VerifiedForecast(48, FPAdd));
+            //FPAdd.VerifiedForecasts.Add(new VerifiedForecast(60, FPAdd));
+            //FPAdd.VerifiedForecast2 = new VerifiedForecast(24, FPAdd);
+            //FPAdd.VerifiedForecast3 = new VerifiedForecast(36, FPAdd);
+            //FPAdd.VerifiedForecast4 = new VerifiedForecast(48, FPAdd);
+            //FPAdd.VerifiedForecast5 = new VerifiedForecast(60, FPAdd);
 
             _context.ForecastPeriods.Add(FPAdd);
 

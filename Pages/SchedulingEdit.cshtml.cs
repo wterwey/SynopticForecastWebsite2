@@ -50,6 +50,17 @@ namespace SynopticForecastWebsite2.Pages
             }
             else
             {
+                FPEdit.ForecastTimeUTC1 = FPEdit.StartingTimeUTC.AddHours((double)FPEdit.ForecastTime1);
+                FPEdit.ForecastTimeUTC2 = FPEdit.StartingTimeUTC.AddHours((double)FPEdit.ForecastTime2);
+                FPEdit.ForecastTimeUTC3 = FPEdit.StartingTimeUTC.AddHours((double)FPEdit.ForecastTime3);
+                FPEdit.ForecastTimeUTC4 = FPEdit.StartingTimeUTC.AddHours((double)FPEdit.ForecastTime4);
+                FPEdit.ForecastTimeUTC5 = FPEdit.StartingTimeUTC.AddHours((double)FPEdit.ForecastTime5);
+
+                //-------------------------------------------
+                // Change the VerFor and For associated with this ForPer???
+                //-------------------------------------------
+
+
                 _context.Attach(FPEdit).State = EntityState.Modified;
             }
 

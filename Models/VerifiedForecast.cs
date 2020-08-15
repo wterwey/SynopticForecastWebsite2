@@ -10,6 +10,7 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // PROPERTIES
         public int VerifiedForecastID { get; set; }
+        public ForecastPeriod ForecastPeriod { get; set; }
         public int ForecastPeriodID { get; set; }
         public int? ForecastTime { get; set; }
         public double? MinimumTemperature { get; set; }
@@ -66,66 +67,68 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // CONSTRUCTOR
 
-        public VerifiedForecast(int forecastTime, int forecastPeriodID)
-        {
-            VerifiedForecastID = 0;
-            ForecastPeriodID = forecastPeriodID;
-            ForecastTime = forecastTime;
-            MinimumTemperature = null;
-            MaximumTemperature = null;
-            SurfaceTemperature = null;
-            SurfaceDewpoint = null;
-            SurfaceWindDirect = null;
-            SurfaceWindSpeed = null;
-            SurfaceMaxWindSpeed = null;
-            SeaLevelPressure = null;
-            CloudCover = null;
-            CloudCeiling = null;
-            Visibility = null;
-            ObservedWeather = null;
-            ProbOfPrecip = null;
-            PrecipCategory = null;
-            PrecipType = null;
-            SnowAccumulation = null;
-            Thunderstorms = false;
-            SevereWeatherFlood = false;
-            SevereWeatherWind = false;
-            SevereWeatherTornado = false;
-            SevereWeatherHail = false;
-            FrontalPassage = null;
-            FrontalPassageTime = null;
+        //public VerifiedForecast(int forecastTime, ForecastPeriod forecastPeriod)
+        //{
+        //    VerifiedForecastID = 0;
+        //    ForecastPeriod = forecastPeriod;
+        //    ForecastPeriodID = forecastPeriod.ForecastPeriodID;
+        //    ForecastTime = forecastTime;
+        //    MinimumTemperature = null;
+        //    MaximumTemperature = null;
+        //    SurfaceTemperature = null;
+        //    SurfaceDewpoint = null;
+        //    SurfaceWindDirect = null;
+        //    SurfaceWindSpeed = null;
+        //    SurfaceMaxWindSpeed = null;
+        //    SeaLevelPressure = null;
+        //    CloudCover = null;
+        //    CloudCeiling = null;
+        //    Visibility = null;
+        //    ObservedWeather = null;
+        //    ProbOfPrecip = null;
+        //    PrecipCategory = null;
+        //    PrecipType = null;
+        //    SnowAccumulation = null;
+        //    Thunderstorms = false;
+        //    SevereWeatherFlood = false;
+        //    SevereWeatherWind = false;
+        //    SevereWeatherTornado = false;
+        //    SevereWeatherHail = false;
+        //    FrontalPassage = null;
+        //    FrontalPassageTime = null;
 
-        }
-        public VerifiedForecast()
-        {
-            VerifiedForecastID = 0;
-            ForecastPeriodID = 0;
-            ForecastTime = null;
-            MinimumTemperature = null;
-            MaximumTemperature = null;
-            SurfaceTemperature = null;
-            SurfaceDewpoint = null;
-            SurfaceWindDirect = null;
-            SurfaceWindSpeed = null;
-            SurfaceMaxWindSpeed = null;
-            SeaLevelPressure = null;
-            CloudCover = null;
-            CloudCeiling = null;
-            Visibility = null;
-            ObservedWeather = null;
-            ProbOfPrecip = null;
-            PrecipCategory = null;
-            PrecipType = null;
-            SnowAccumulation = null;
-            Thunderstorms = false;
-            SevereWeatherFlood = false;
-            SevereWeatherWind = false;
-            SevereWeatherTornado = false;
-            SevereWeatherHail = false;
-            FrontalPassage = null;
-            FrontalPassageTime = null;
+        //}
+        //public VerifiedForecast()
+        //{
+        //    VerifiedForecastID = 0;
+        //    ForecastPeriod = new ForecastPeriod();
+        //    ForecastPeriodID = 0;
+        //    ForecastTime = null;
+        //    MinimumTemperature = null;
+        //    MaximumTemperature = null;
+        //    SurfaceTemperature = null;
+        //    SurfaceDewpoint = null;
+        //    SurfaceWindDirect = null;
+        //    SurfaceWindSpeed = null;
+        //    SurfaceMaxWindSpeed = null;
+        //    SeaLevelPressure = null;
+        //    CloudCover = null;
+        //    CloudCeiling = null;
+        //    Visibility = null;
+        //    ObservedWeather = null;
+        //    ProbOfPrecip = null;
+        //    PrecipCategory = null;
+        //    PrecipType = null;
+        //    SnowAccumulation = null;
+        //    Thunderstorms = false;
+        //    SevereWeatherFlood = false;
+        //    SevereWeatherWind = false;
+        //    SevereWeatherTornado = false;
+        //    SevereWeatherHail = false;
+        //    FrontalPassage = null;
+        //    FrontalPassageTime = null;
 
-        }
+        //}
 
         //==============================================================
         // DATA ADDITION METHODS
