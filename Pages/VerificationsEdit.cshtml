@@ -1,9 +1,152 @@
-﻿@page
+﻿@page "{VFid?}"
 @model SynopticForecastWebsite2.Pages.VerificationsEditModel
 @{
     ViewData["Title"] = "VerificationsEdit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+@section Styles
+{
+    <style type="text/css">
+    </style>
+}
 
-<h1>VerificationsEdit</h1>
+<h1>Edit Verification</h1>
+<h2>@Model.VF_ForePeriod.City</h2>
+@switch (Model.VFEdit.ForecastTime / 12)
+{
+    case 1:
+        <h2>@Model.VF_ForePeriod.ForecastTimeUTC1</h2>
+        break;
+    case 2:
+        <h2>@Model.VF_ForePeriod.ForecastTimeUTC2</h2>
+        break;
+    case 3:
+        <h2>@Model.VF_ForePeriod.ForecastTimeUTC3</h2>
+        break;
+    case 4:
+        <h2>@Model.VF_ForePeriod.ForecastTimeUTC4</h2>
+        break;
+    case 5:
+        <h2>@Model.VF_ForePeriod.ForecastTimeUTC5</h2>
+        break;
+    default:
+        <h2 style="color:red;">Error</h2>
+        break;
+}
 
+<form method="post">
+    <input type="hidden" asp-for="VFEdit.VerifiedForecastID" />
+    <input type="hidden" asp-for="VFEdit.ForecastPeriod" />
+    <input type="hidden" asp-for="VFEdit.ForecastPeriodID" />
+    <input type="hidden" asp-for="VFEdit.ForecastTime" />
+    <table class="table table-bordered">
+        <tr>
+            <th>Quantity</th>
+            <th>Value</th>
+        </tr>
+        @if (Model.VFEdit.ForecastTime == 12)
+        {
+            <tr>
+                <td>Minimum Temperature</td>
+                <td><input type="number" asp-for="VFEdit.MinimumTemperature" /></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>Maximum Temperature</td>
+                <td><input type="number" asp-for="VFEdit.MaximumTemperature" /></td>
+            </tr>
+        }
+        <tr>
+            <td>Surface Temperature</td>
+            <td><input type="number" asp-for="VFEdit.SurfaceTemperature" /></td>
+        </tr>
+        <tr>
+            <td>Surface Dewpoint</td>
+            <td><input type="number" asp-for="VFEdit.SurfaceDewpoint" /></td>
+        </tr>
+        <tr>
+            <td>Surface Wind Direction</td>
+            <td><input type="number" asp-for="VFEdit.SurfaceWindDirect" min="0" max="350" step="10" /></td>
+        </tr>
+        <tr>
+            <td>Surface Wind Speed</td>
+            <td><input type="number" asp-for="VFEdit.SurfaceWindSpeed" min="0" /></td>
+        </tr>
+        <tr>
+            <td>Surface Max Wind Speed</td>
+            <td><input type="number" asp-for="VFEdit.SurfaceMaxWindSpeed" min="0" /></td>
+        </tr>
+        <tr>
+            <td>Sea Level Pressure</td>
+            <td><input type="number" asp-for="VFEdit.SeaLevelPressure" /></td>
+        </tr>
+        <tr>
+            <td>Cloud Cover</td>
+            <td>
+                <select asp-for="VFEdit.CloudCover">
+                    <option value="CLR">CLR</option>
+                    <option value="SCT">SCT</option>
+                    <option value="BKN">BKN</option>
+                    <option value="OVC">OVC</option>
+                    <option value="OBS">OBS</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Cloud Ceiling</td>
+            <td><input type="number" asp-for="VFEdit.CloudCeiling" min="1" max="8" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Visibility</td>
+            <td><input type="number" asp-for="VFEdit.Visibility" min="1" max="7" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Observed Weather</td>
+            <td><input type="text" asp-for="VFEdit.ObservedWeather" /></td>
+        </tr>
+        <tr>
+            <td>Probability of Precipitation</td>
+            <td><input type="number" asp-for="VFEdit.ProbOfPrecip" min="0" max="100" step="100" /></td>
+        </tr>
+        <tr>
+            <td>Precipitation Category</td>
+            <td><input type="number" asp-for="VFEdit.PrecipCategory" min="0" max="8" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Precipitation Type</td>
+            <td><input type="text" asp-for="VFEdit.PrecipType" /></td>
+        </tr>
+        <tr>
+            <td>Snow Accumulation</td>
+            <td><input type="number" asp-for="VFEdit.SnowAccumulation" min="0" max="8" step="1" /></td>
+        </tr>
+        <tr>
+            <td>Thunderstorms</td>
+            <td><input type="checkbox" asp-for="VFEdit.Thunderstorms" /></td>
+        </tr>
+        <tr>
+            <td>Severe Weather</td>
+            <td>
+                <label asp-for="VFEdit.SevereWeatherFlood">Flood: </label>
+                <input type="checkbox" asp-for="VFEdit.SevereWeatherFlood" /><br />
+                <label asp-for="VFEdit.SevereWeatherWind">Wind: </label>
+                <input type="checkbox" asp-for="VFEdit.SevereWeatherWind" /><br />
+                <label asp-for="VFEdit.SevereWeatherTornado">Tornado: </label>
+                <input type="checkbox" asp-for="VFEdit.SevereWeatherTornado" /><br />
+                <label asp-for="VFEdit.SevereWeatherHail">Hail: </label>
+                <input type="checkbox" asp-for="VFEdit.SevereWeatherHail" />
+            </td>
+        </tr>
+        <tr>
+            <td>Front</td>
+            <td><input type="text" asp-for="VFEdit.FrontalPassage" /></td>
+        </tr>
+        <tr>
+            <td>Front Time</td>
+            <td><input type="text" asp-for="VFEdit.FrontalPassageTime" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Save" class="btn btn-info" /><input type="hidden" asp-for="VFEdit.VerifiedForecastID" />
+</form>

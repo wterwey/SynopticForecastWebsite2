@@ -13,19 +13,10 @@
 <h1>Verification Forecasts</h1>
 
 <table class="table table-bordered">
-    @foreach (var veriFore in Model.AllVerified)
-    {
-        <tr>
-            <td>@veriFore.ForecastPeriod.City - @veriFore.ForecastTime</td>
-        </tr>
-    }
-</table>
-
-<table class="table table-bordered">
     <tr>
         <th>Forecast City (Code)</th>
         <th>Forecast Period Start</th>
-        <th>Verification Forecast (Quick Look)</th>
+        <th colspan="5">Verification Forecast (Quick Look)</th>
     </tr>
     @foreach (var period in Model.ForecastPeriods)
     {
@@ -39,7 +30,7 @@
                 <td>
                     <table class="table table-borderless">
                     <tr>
-                        <th>Hours After</th>
+                        <th>Hour</th>
                         <th>Surf. Temp.</th>
                         <th>Surf. Dewp.</th>
                         <th>SLP</th>
@@ -49,6 +40,13 @@
                         <td>@veriCast.SurfaceTemperature</td>
                         <td>@veriCast.SurfaceDewpoint</td>
                         <td>@veriCast.SeaLevelPressure</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <form method="post">
+                                <a class="btn btn-success" asp-page="VerificationsEdit" asp-route-VFid="@veriCast.VerifiedForecastID">Edit</a>
+                            </form>
+                        </td>
                     </tr>
                     </table>
                 </td>
