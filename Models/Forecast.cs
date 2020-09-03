@@ -10,6 +10,7 @@ namespace SynopticForecastWebsite2.Models
         //==============================================================
         // PROPERTIES
         public int ForecastID { get; set; }
+        public ForecastPeriod ForecastPeriod { get; set; }
         public int ForecastPeriodID { get; set; }
         public int? ForecastTime { get; set; }
         public int? MinimumTemperature { get; set; }

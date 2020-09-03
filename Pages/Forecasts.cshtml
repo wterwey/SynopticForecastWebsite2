@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{FPid?}"
 @model SynopticForecastWebsite2.Pages.ForecastsModel
 @{
     ViewData["Title"] = "Forecasts";
@@ -7,74 +7,181 @@
 @section Styles
 {
     <style type="text/css">
-        table {
-            border-collapse: collapse;
-        }
-
-        tr {
-            display: block;
-            float: left;
-        }
-
-        th, td {
-            display: block;
-            border: 1px solid black;
-        }
     </style>
 }
 
 <h1>Forecasts</h1>
-
-<h2>City - CityCode</h2>
-<h3 style="font-style:italic">From: TimeStart to TimeEnd</h3>
-
-<form>
-    <table class="table table-bordered">
-        <tr>
-            <th>&nbsp;</th>
-            <th>Minimum Temperature (C)</th>
-            <th>Maximum Temperature (C)</th>
-            <th>Surface Temperature (C)</th>
-            <th>Surface Dewpoint (C)</th>
-            <th>Surface Wind Direction (deg)</th>
-            <th>Surface Wind Speed (kts)</th>
-            <th>Surface Wind Speed Maximum (kts)</th>
-            <th>Sea Level Pressure (mb)</th>
-            <th>Cloud Cover</th>
-            <th>Cloud Ceiling</th>
-            <th>Visibility</th>
-            <th>Observed Weather</th>
-            <th>Probability of Precipitation</th>
-            <th>Precipitation Category</th>
-            <th>Precipitation Type</th>
-            <th>Snow Accumulation</th>
-            <th>Thunderstorms</th>
-            <th>Severe Weather</th>
-            <th>Frontal Passage</th>
-            <th>&nbsp;</th>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>Edit</td>
-        </tr>
-    </table>
+<form method="post">
+    <select asp-for="SelectedForePeriodID" onchange="this.form.submit();">
+        @foreach(var period in Model.ForecastPeriods)
+        {
+            <option value="@period.ForecastPeriodID">@period.City (@period.CityID) : @period.StartingTimeUTC</option>
+        }
+    </select>
 </form>
+
+@if (Model.PersonalForecasts != null && Model.PersonalForecasts.Any())
+{
+    <h2>@Model.CurrentPeriod.City - @Model.CurrentPeriod.CityID</h2>
+    <h3 style="font-style:italic">From: @Model.CurrentPeriod.ForecastTimeUTC1 to @Model.CurrentPeriod.ForecastTimeUTC5</h3>
+    <form>
+        <table class="table table-bordered">
+            <tr>
+                <th>Forecast Variable</th>
+                <th>@Model.CurrentPeriod.ForecastTimeUTC1</th>
+                <th>@Model.CurrentPeriod.ForecastTimeUTC2</th>
+                <th>@Model.CurrentPeriod.ForecastTimeUTC3</th>
+                <th>@Model.CurrentPeriod.ForecastTimeUTC4</th>
+                <th>@Model.CurrentPeriod.ForecastTimeUTC5</th>
+            </tr>
+            <tr>
+                <td>Minimum Temperature (C)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].MinimumTemperature</td>
+                }
+            </tr>
+            <tr>
+                <td>Maximum Temperature (C)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].MaximumTemperature</td>
+                }
+            </tr>
+            <tr>
+                <td>Surface Temperature (C)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SurfaceTemperature</td>
+                }
+            </tr>
+            <tr>
+                <td>Surface Dewpoint (C)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SurfaceDewpoint</td>
+                }
+            </tr>
+            <tr>
+                <td>Surface Wind Direction (deg)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SurfaceWindDirect</td>
+                }
+            </tr>
+            <tr>
+                <td>Surface Wind Speed (kts)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SurfaceWindSpeed</td>
+                }
+            </tr>
+            <tr>
+                <td>Surface Wind Speed Maximum (kts)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SurfaceMaxWindSpeed</td>
+                }
+            </tr>
+            <tr>
+                <td>Sea Level Pressure (mb)</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SeaLevelPressure</td>
+                }
+            </tr>
+            <tr>
+                <td>Cloud Cover</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].CloudCover</td>
+                }
+            </tr>
+            <tr>
+                <td>Cloud Ceiling</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].CloudCeiling</td>
+                }
+            </tr>
+            <tr>
+                <td>Visibility</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].Visibility</td>
+                }
+            </tr>
+            <tr>
+                <td>Observed Weather</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].ObservedWeather</td>
+                }
+            </tr>
+            <tr>
+                <td>Probability of Precipitation</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].ProbOfPrecip</td>
+                }
+            </tr>
+            <tr>
+                <td>Precipitation Category</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].PrecipCategory</td>
+                }
+            </tr>
+            <tr>
+                <td>Precipitation Type</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].PrecipType</td>
+                }
+            </tr>
+            <tr>
+                <td>Snow Accumulation</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].SnowAccumulation</td>
+                }
+            </tr>
+            <tr>
+                <td>Thunderstorms</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].Thunderstorms</td>
+                }
+            </tr>
+            <tr>
+                <td>Severe Weather</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>Flood: @Model.PersonalForecasts[i].SevereWeatherFlood
+                    <br/>Wind: @Model.PersonalForecasts[i].SevereWeatherWind
+                    <br/>Tornado: @Model.PersonalForecasts[i].SevereWeatherTornado
+                    <br/>Hail: @Model.PersonalForecasts[i].SevereWeatherHail</td>
+                }
+            </tr>
+            <tr>
+                <td>Frontal Passage</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td>@Model.PersonalForecasts[i].FrontalPassage
+                    <br/>@Model.PersonalForecasts[i].FrontalPassageTime</td>
+                }
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <td><a class="btn btn-success btn-sm" asp-page="ForecastEdit" asp-route-ForID="@Model.PersonalForecasts[i].ForecastID">Edit</a></td>
+                }
+            </tr>
+        </table>
+    </form>
+}
+else
+{
+    <p>Select a forecast period above...</p>
+}

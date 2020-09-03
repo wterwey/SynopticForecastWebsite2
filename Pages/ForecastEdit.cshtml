@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{ForID?}"
 @model SynopticForecastWebsite2.Pages.ForecastEditModel
 @{
     ViewData["Title"] = "Edit Forecast";
@@ -13,8 +13,8 @@
 
 <h1>Edit Forecast</h1>
 
-<h2>City - CityCode</h2>
-<h3 style="font-style:italic">For: ForecastTime</h3>
+<h2>@Model.CurrentFP.City - @Model.CurrentFP.CityID</h2>
+<h3 style="font-style:italic">For: @Model.CurrentForecast.ForecastTime</h3>
 
 <form method="post">
     <table class="table table-bordered">
@@ -24,40 +24,40 @@
         </tr>
         <tr>
             <td>Minimum Temperature (C)</td>
-            <td><input type="number" asp-for="MinimumTemperature" min="-40" max="60" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.MinimumTemperature" min="-40" max="60" step="1" /></td>
         </tr>
         <tr>
             <td>Maximum Temperature (C)</td>
-            <td><input type="number" asp-for="MaximumTemperature" min="-40" max="60" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.MaximumTemperature" min="-40" max="60" step="1" /></td>
         </tr>
         <tr>
             <td>Surface Temperature (C)</td>
-            <td><input type="number" asp-for="SurfaceTemperature" min="-40" max="60" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.SurfaceTemperature" min="-40" max="60" step="1" /></td>
         </tr>
         <tr>
             <td>Surface Dewpoint (C)</td>
-            <td><input type="number" asp-for="SurfaceDewpoint" min="-40" max="60" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.SurfaceDewpoint" min="-40" max="60" step="1" /></td>
         </tr>
         <tr>
             <td>Surface Wind Direction (deg)</td>
-            <td><input type="number" asp-for="SurfaceWindDirect" min="0" max="350" step="10" /></td>
+            <td><input type="number" asp-for="CurrentForecast.SurfaceWindDirect" min="0" max="350" step="10" /></td>
         </tr>
         <tr>
             <td>Surface Wind Speed (kts)</td>
-            <td><input type="number" asp-for="SurfaceWindSpeed" min="0" max="100" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.SurfaceWindSpeed" min="0" max="100" step="1" /></td>
         </tr>
         <tr>
             <td>Surface Wind Speed Maximum (kts)</td>
-            <td><input type="number" asp-for="SurfaceMaxWindSpeed" min="0" max="100" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.SurfaceMaxWindSpeed" min="0" max="100" step="1" /></td>
         </tr>
         <tr>
             <td>Sea Level Pressure (mb)</td>
-            <td><input type="number" asp-for="SeaLevelPressure" min="900" max="1050" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.SeaLevelPressure" min="900" max="1050" step="1" /></td>
         </tr>
         <tr>
             <td>Cloud Cover</td>
             <td>
-                <select asp-for="CloudCover">
+                <select asp-for="CurrentForecast.CloudCover">
                     <option value="CLR">CLR</option>
                     <option value="SCT">SCT</option>
                     <option value="BKN">BKN</option>
@@ -68,16 +68,16 @@
         </tr>
         <tr>
             <td>Cloud Ceiling</td>
-            <td><input type="number" asp-for="CloudCeiling" min="1" max="8" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.CloudCeiling" min="1" max="8" step="1" /></td>
         </tr>
         <tr>
             <td>Visibility</td>
-            <td><input type="number" asp-for="Visibility" min="1" max="7" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.Visibility" min="1" max="7" step="1" /></td>
         </tr>
         <tr>
             <td>Observed Weather</td>
             <td>
-                <select asp-for="ObservedWeather">
+                <select asp-for="CurrentForecast.ObservedWeather">
                     <option value="" disabled>Liquid Precipitation</option>
                     <option value="DZ">DZ (Drizzle)</option>
                     <option value="RA">RA (Rain)</option>
@@ -116,16 +116,16 @@
         </tr>
         <tr>
             <td>Probability of Precipitation</td>
-            <td><input type="number" asp-for="ProbOfPrecip" min="0" max="100" step="10" /></td>
+            <td><input type="number" asp-for="CurrentForecast.ProbOfPrecip" min="0" max="100" step="10" /></td>
         </tr>
         <tr>
             <td>Precipitation Category</td>
-            <td><input type="number" asp-for="PrecipCategory" min="0" max="6" step="1" /></td>
+            <td><input type="number" asp-for="CurrentForecast.PrecipCategory" min="0" max="6" step="1" /></td>
         </tr>
         <tr>
             <td>Precipitation Type</td>
             <td>
-                <select asp-for="PrecipType">
+                <select asp-for="CurrentForecast.PrecipType">
                     <option value="Liquid">Liquid</option>
                     <option value="Freezing">Freezing</option>
                     <option value="Frozen">Frozen</option>
@@ -135,7 +135,7 @@
         <tr>
             <td>Snow Accumulation</td>
             <td>
-                <select asp-for="SnowAccumulation">
+                <select asp-for="CurrentForecast.SnowAccumulation">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -147,38 +147,38 @@
         </tr>
         <tr>
             <td>Thunderstorms</td>
-            <td><input type="checkbox" asp-for="Thunderstorms" value="true" /></td>
+            <td><input type="checkbox" asp-for="CurrentForecast.Thunderstorms" value="true" /></td>
         </tr>
         <tr>
             <td>Severe Weather</td>
             <td>
-                <input type="checkbox" asp-for="SevereWeatherFlood" value="true" />
-                <label asp-for="SevereWeatherFlood">Flood</label><br />
-                <input type="checkbox" asp-for="SevereWeatherWind" value="true" />
-                <label asp-for="SevereWeatherWind">Wind</label><br />
-                <input type="checkbox" asp-for="SevereWeatherTornado" value="true" />
-                <label asp-for="SevereWeatherTornado">Tornado</label><br />
-                <input type="checkbox" asp-for="SevereWeatherHail" value="true" />
-                <label asp-for="SevereWeatherHail">Hail</label><br />
+                <input type="checkbox" asp-for="CurrentForecast.SevereWeatherFlood" value="true" />
+                <label asp-for="CurrentForecast.SevereWeatherFlood">Flood</label><br />
+                <input type="checkbox" asp-for="CurrentForecast.SevereWeatherWind" value="true" />
+                <label asp-for="CurrentForecast.SevereWeatherWind">Wind</label><br />
+                <input type="checkbox" asp-for="CurrentForecast.SevereWeatherTornado" value="true" />
+                <label asp-for="CurrentForecast.SevereWeatherTornado">Tornado</label><br />
+                <input type="checkbox" asp-for="CurrentForecast.SevereWeatherHail" value="true" />
+                <label asp-for="CurrentForecast.SevereWeatherHail">Hail</label><br />
             </td>
         </tr>
         <tr>
             <td>Frontal Passage</td>
             <td>
-                <select asp-for="FrontalPassage">
+                <select asp-for="CurrentForecast.FrontalPassage">
                     <option value="cold">Cold Front</option>
                     <option value="warm">Warm Front</option>
                     <option value="occluded">Occluded Front</option>
                     <option value="trough">Trough</option>
                 </select>
                 at
-                <input type="number" asp-for="FrontalPassageTime" min="0" max="23" step="1" />
+                <input type="text" asp-for="CurrentForecast.FrontalPassageTime" min="0" max="23" step="1" />
                 UTC
             </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td>SUBMIT</td>
+            <td><input type="submit" value="Save" class="btn btn-primary btn-sm"/><input type="hidden" asp-for="CurrentForecast.ForecastPeriod" /><input type="hidden" asp-for="CurrentForecast.ForecastPeriodID" /><input type="hidden" asp-for="CurrentForecast.ForecastID" /><input type="hidden" asp-for="CurrentForecast.ForecastTime" /></td>
         </tr>
     </table>
 </form>
